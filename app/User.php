@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\SocialProfile;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -38,8 +40,14 @@ class User extends Authenticatable
     ];
 
     public function adminlte_image(){
+        
+        $social_profile = $this->socialProfiles->first();
 
-        return 'https://picsum.photos/300/300';
+        if($social_profile){
+            return $social_profile->social_avatar;
+        }else{
+            return 'https://picsum.photos/300/300';
+        }
         
     }
 
@@ -50,6 +58,12 @@ class User extends Authenticatable
     public function adminlte_profile_url()
     {
         return 'profile/username';
+    }
+
+    //Relacion uno a muchos
+
+    public function socialProfiles(){
+        return $this->hasMany(SocialProfile::class);
     }
 
 }

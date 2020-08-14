@@ -1,5 +1,7 @@
 @extends('adminlte::auth.login')
 
+@section('title', 'Login')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -66,6 +68,7 @@
                         </div>
                     </form>
                 </div>
+                
             </div>
         </div>
     </div>
